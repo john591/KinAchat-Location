@@ -4,8 +4,6 @@ import django_heroku
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-SECRET_KEY = '1u%bko-1uh6f%$zo=wp76j=cs*&6(q7*b1v%s34&7*p-_m6@sl'
-
 
 DEBUG = False
 
