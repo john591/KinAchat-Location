@@ -1,0 +1,116 @@
+{% extends "ebay/base.html" %}
+{% load static %}
+{% block title %}
+  Kin Achat & Location
+{% endblock %}
+
+{% block body %}
+  <div class="container-fluid"><br>
+    <h3><i class="fas fa-dumpster text-info"></i> <strong>  Categories </strong></h3>
+      <!--- grande div, categories --->
+      <div class="categories shadow-sm p-3 mb-5 bg-white rounded">
+          <!--- boucle pour afficher les categories --->
+          {% for categorie in categories %}
+            {% if categorie.libelle != "Somba neti na Zando" %}
+              <!--- la div complet pour l'affichage de categorie par categorie dans block --->
+              <div class="bg-light categorie border shadow p-3 mb-5 rounded hvr-shrink">
+                <div class="libelle bg-white">
+                  <a class="text-info" href="{% url 'sous_categorie_view' categorie.id %}">
+                    <h5 class="text-dark"><strong>{{ categorie.libelle }}</strong></h5>
+                  </a>
+                </div>
+                <div class="img-catego">
+                  <a class="text-info" href="{% url 'sous_categorie_view' categorie.id %}">
+                    {% for link in sousimg %}
+                        {% if categorie.img_cate.id == link.img_link.id and link.numero_image == 1 %}
+                          <img class="img-cat img-fluid img-rounded" src="https://kinachatlocationbucket.s3-us-west-2.amazonaws.com/media/{{ link.link_img }}" alt="" title="{{ link.titre }}">
+                        {% endif %}
+                    {% endfor %}
+                  </a>
+                </div><br><br>
+                <div class="voirplus bg-white">
+                  <a class="text-primary" href="{% url 'sous_categorie_view' categorie.id %}">
+                    <label>Voir plus ...</label>
+                  </a>
+                </div><br>
+              </div>
+            {% endif %}
+          {% endfor %}
+      </div>
+      <!--- Block pour recommandations, les articles --->
+      <div class="spinner-grow text-danger" role="status">
+        <span class="sr-only">Loading...</span>
+      </div><h5><strong>  Suggestions: </strong></h5>
+      <hr><br><br>
+      <div class="d-flex flex-wrap bg-light justify-content-center">
+        {% for article in items %}
+          {% if article.article_sous_cat.categorie.libelle != "Somba neti na Zando" %}
+            <div class="p-2 bd-highlight border itemrecom bg-white hvr-shrink rounded text-center">
+                <a href="{% url 'achat_article' article.id %}">
+                  {% for link in sousimg %}
+                    {% if article.article_img.id == link.img_link.id and link.numero_image == 1 %}
+                        <img class="img-cat img-fluid" src="https://kinachatlocationbucket.s3-us-west-2.amazonaws.com/media/{{ link.link_img }}" alt="" title="">
+                    {% endif %}
+                  {% endfor %}
+                  <div class="text-center" style="width:100%; margin-top:20px; font-size:14px;">
+                     <span style="width:100%;"><strong>{{ article.libelle }}</strong></span><br>
+                     <span class="text-muted" style="width:100%;">{{ article.article_sous_cat.libelle_sous }}</span><br>
+                     <span style="width:100%;"><strong>Prix : {{ article.prix }} {{ article.devise_sur_le_prix }}</strong></span><br>
+                    <span class="text-muted">Stock : {{ article.nbr_en_stock }}</span>
+                  </div>
+                </a>
+             </div>
+          {% endif %}
+        {% endfor %}
+     </div>
+     <div class=" text-center" style="width:100%;">
+       <a href="#" class="btn btn-info hvr-pulse-shrink"> Voir plus d'articles </a>
+     </div><br><br>
+    <div class="row">
+      <!--- contenue pour Somba neti na Zando --->
+      <div class="spinner-grow text-info" role="status">
+        <span class="sr-only">Loading...</span>
+      </div><h5> <strong> Somba neti na Zando</strong></h5><!--i class="fas fa-bullhorn text-info"></i--->
+      <hr><br><br>
+      <div class="col-lg-12 shadow-sm p-3 mb-5 bg-white rounded border text-center">
+        <br><br>
+        <p>Nous vendons au même prix qu'au grand marché de Kinshasa!</p>
+          {% for categorie in categories %}
+            {% if categorie.libelle == "Somba neti na Zando" %}
+              <p class="text-dark">
+                {{ categorie.description }}
+              </p><br><br>
+              <a href="#" class="btn btn-info hvr-pulse-shrink"> Kota na Zando ya Kin </a>
+            {% endif%}
+          {% endfor %}
+        <br><br>
+      </div>
+      <!--- Contenue sous-categorie --->
+      <h5 class=""><i class="fab fa-amazon-pay text-info"></i> <strong>  Juste pour vous </strong></h5>
+      <hr><br><br>
+      <div class="col-lg-12">
+        <div class="row">
+          {% for sous_categorie in sous_categories|slice:":8" %}
+            {% if sous_categorie.categorie.libelle != "Somba neti na Zando" %}
+              <div class="col-lg-3">
+                <div class="sousCate shadow-none p-3 mb-5 bg-white rounded text-center  hvr-shrink">
+                  <a href="{% url 'articles_view' sous_categorie.id %}">
+                    {% for img in sousimg %}
+                      {% if sous_categorie.img_sous.id == img.img_link.id and img.numero_image == 1 %}
+                        <img class="img-fluid img-cat" src="https://kinachatlocationbucket.s3-us-west-2.amazonaws.com/media/{{ img.link_img }}" alt="" title="">
+                      {% endif %}
+                    {% endfor %}<br><br>
+                    <span style="margin-top:20px;"><strong>{{ sous_categorie.libelle_sous }}</strong></span>
+                  </a>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div><br><br>
+      <div class="col-lg-12 text-center">
+        <a href="#" class="btn btn-info hvr-pulse-shrink"> Voir autres </a><br><br>
+      </div><br><br>
+    </div>
+  </div>
+{% endblock %}

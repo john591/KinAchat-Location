@@ -1,0 +1,59 @@
+{% extends "ebay/base.html" %}
+{% block title %}
+  Kin Achat & Location | {{ categories.libelle }}
+{% endblock %}
+
+{% block body %}
+  <!--- Contenue categorie --->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <a href="{% url 'index' %}">Accueil</a> ->  <b>{{ categories.libelle }} </b><br><br>
+    </div>
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10 shadow-sm p-3 mb-5 bg-white rounded">
+      <div class="row">
+        <div class="col-lg-12">
+          <h3>{{ categories.libelle }}</h3>
+        </div>
+        <div class="col-lg-12 text-center">
+          {% for link in sousimg %}
+            {% if categories.img_cate.id == link.img_link.id and link.numero_image == 2 %}
+              <img class="img-fluid img-cat" src="https://kinachatlocationbucket.s3-us-west-2.amazonaws.com/media/{{ link.link_img }}" alt="" title="{{ link.img_link.description }}">
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="col-lg-12">
+          <p>{{ categories.description }}</p>
+        </div>
+      </div>
+     </div>
+    <div class="col-lg-1"></div>
+ </div>
+</div>
+    <!--- Contenue sous-categorie --->
+    <div class="col-lg-12 bg-white">
+        <h6 class="text-muted"><i class="fab fa-amazon-pay text-info"></i> <strong>  Faites votre choix</strong><span class="badge badge-pill badge-light float-right">Nombre d'article (s) : ...</span> </h6>
+        <hr>
+        <div class="d-flex flex-wrap justify-content-center">
+            {% for sous_categorie in sous_categories %}
+              {% if sous_categorie.categorie.libelle != "Somba neti na Zando" %}
+                <div class="p-2 bd-highlight border itemrecom bg-white hvr-shrink rounded text-center">
+                  <a href="{% url 'articles_view' sous_categorie.id %}">
+                    <div class="sousCate shadow-none p-3 mb-5 bg-white rounded text-center">
+                      {% for link in sousimg %}
+                        {% if sous_categorie.img_sous.id == link.img_link.id and link.numero_image == 1 %}
+                          <img class="img-fluid img-cat" src="https://kinachatlocationbucket.s3-us-west-2.amazonaws.com/media/{{ link.link_img }}" alt="" title="{{ link.img_link.description }}">
+                        {% endif %}
+                      {% endfor %}<br><br>
+                      <span style="margin-top:20px;"><strong>{{ sous_categorie.libelle_sous }}</strong></span>
+                    </div>
+                  </a>
+                </div>
+              {% endif %}
+              {% empty %}
+              <h4>Pas de sous-categories pour ce choix </h4>
+            {% endfor %}
+        </div>
+      </div>
+{% endblock %}

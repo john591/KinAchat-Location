@@ -1,0 +1,68 @@
+{% extends "ebay/base.html" %}
+{% block title %}
+  Kin Achat & Location | {{ sous_categorie.libelle_sous }}
+{% endblock %}
+
+{% block body %}
+    <!--- Contenue categorie --->
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+          <a href="{% url 'index' %}">Accueil</a> -> <a href="#">{{ sous_categorie.categorie.libelle }}</a> -> <b> {{ sous_categorie.libelle_sous }} </b><br><br>
+        </div>
+      <div class="col-lg-1"></div>
+      <div class="col-lg-10 shadow-sm p-3 mb-5 bg-white rounded">
+        <div class="row">
+          <div class="col-lg-12">
+            <h3>{{ sous_categorie.libelle_sous }}</h3>
+          </div>
+          <div class="col-lg-12 text-center">
+            {% for link in img_l %}
+              {% if sous_categorie.img_sous.id == link.img_link.id and link.numero_image == 2 %}
+                <img class="img-fluid img-cat" src="https://kinachatlocationbucket.s3-us-west-2.amazonaws.com/media/{{ link.link_img }}" alt="" title="{{ link.img_link.description }}">
+              {% endif %}
+            {% endfor %}
+          </div>
+          <div class="col-lg-12">
+            <p>{{ sous_categorie.description_sous }}</p>
+          </div>
+        </div>
+     </div>
+    <div class="col-lg-1"></div>
+  </div>
+</div>
+<!--- Contenue Articles --->
+<div class="container-fluid bg-white shadow-sm p-3 mb-5 rounded">
+  <div class="row">
+    <div class="col-lg-12">
+      <h6 class="text-muted"><i class="fab fa-amazon-pay text-info"></i> <strong>Liste des {{ sous_categorie.libelle_sous }} </strong><span class="badge badge-pill badge-light float-right">Nbr d'article (s) : ...</span> </h6>
+      <hr>
+      <div class="d-flex flex-wrap justify-content-center">
+        {% for article in items %}
+            {% if sous_categorie.categorie.libelle != "Somba neti na Zando" %}
+              <div class="p-2 bd-highlight border itemrecom bg-white hvr-shrink rounded text-center">
+                <a href="{% url 'achat_article' article.id %}">
+                  <div class="sousCate shadow-none p-3 mb-5 bg-white rounded text-center">
+                    {% for link in img_l %}
+                      {% if article.article_img.id == link.img_link.id and link.numero_image == 1 %}
+                        <img class="img-fluid img-cat" src="https://kinachatlocationbucket.s3-us-west-2.amazonaws.com/media/{{ link.link_img }}" alt="" title="{{ link.img_link.description }}">
+                      {% endif %}
+                    {% endfor %}
+                    <div class="text-center" style="width:100%; margin-top:5px; font-size:14px;">
+                     <span style="width:100%;"><strong>{{ article.libelle }}</strong></span><br>
+                     <span class="text-muted" style="width:100%;">{{ article.article_sous_cat.libelle_sous }}</span><br>
+                     <span style="width:100%;"><strong>Prix : {{ article.prix }} {{ article.devise_sur_le_prix }}</strong></span><br>
+                     <span class="text-muted">Stock : {{ article.nbr_en_stock }}</span>
+                    </div>
+                </div>
+               </a>
+              </div>
+            {% endif %}
+            {% empty %}
+            <h4>Pas de sous-categories pour ce choix </h4>
+          {% endfor %}
+      </div><br><br>
+    </div>
+  </div>
+</div>
+{% endblock %}

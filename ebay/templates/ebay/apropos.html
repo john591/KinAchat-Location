@@ -1,0 +1,56 @@
+{% extends "ebay/base.html" %}
+
+{% block title %}
+  Kin Achat & Location | A propos
+{% endblock %}
+
+{% block body %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <a href="{% url 'index' %}">Accueil</a> ->  <b> À propos </b><br><br>
+      </div>
+      <div class="col-lg-12 text-center bg-danger shadow-sm p-3 mb-5 bg-white rounded" style="height: 300px; margin-top:30px;">
+        <p style="margin-top:70px;">
+           <strong class="text-info">KinAchat &Location</strong> est une alimentation basée à Kinshasa en RDC. On retouve:<br>
+           Des produits frais,<br>
+           Des produits laitiers,<br>
+           Des produits alimentaires...
+        </p>
+      </div><br>
+      <div class="col-lg-12 text-center">
+        <h3>Equipe administrateur</h3>
+        <hr>
+        <div class="row">
+          <div class="col-lg-3"></div>
+          <div class="col-lg-3 text-center" style="margin-bottom:10px;">
+            <div class="card" style="width: 18rem;">
+              <img src="https://kinachatlocationbucket.s3-us-west-2.amazonaws.com/media/Clara.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Clarice wa Lwamba</h5>
+                <p class="card-text">
+                  Fondatrice, Clarice est la directrice génerale à <strong class="text-info">KinAchat &Location</strong>.
+                </p>
+                <a href="#" class="btn btn-info">Savoir plus sur elle</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 text-center" style="margin-bottom:10px;">
+            <div class="card" style="width: 18rem;">
+              <img src="https://kinachatlocationbucket.s3-us-west-2.amazonaws.com/media/johnPhoto.png" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">John NTAMBWE KALUME</h5>
+                <p class="card-text">
+                  Gestionnaire de données, Webmaster et animateur des réseaux sociaux à <strong class="text-info">KinAchat &Location</strong>.
+                </p>
+                <a href="#" class="btn btn-info">Savoir plus sur lui</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3"></div>
+        </div>
+      </div><br><br>
+    </div>
+  </div>
+
+{% endblock %}

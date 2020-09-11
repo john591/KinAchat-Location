@@ -1,0 +1,168 @@
+{% load static %}<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#5bc0de">
+    <link rel="icon" href="https://kinachatlocationbucket.s3-us-west-2.amazonaws.com/media/logo.jpg" type="image/jpg">
+    <link rel="stylesheet" href="https://kinachatlocationbucket.s3-us-west-2.amazonaws.com/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://kinachatlocationbucket.s3-us-west-2.amazonaws.com/static/css/all.css">
+    <link rel="stylesheet" href="https://kinachatlocationbucket.s3-us-west-2.amazonaws.com/static/css/font-awesome.css">
+    <link rel="stylesheet" href="https://kinachatlocationbucket.s3-us-west-2.amazonaws.com/static/css/hover.css" media="all">
+    <link rel="stylesheet" href="https://kinachatlocationbucket.s3-us-west-2.amazonaws.com/static/css/cssFile.css">
+    <title>{% block title %} {% endblock %}</title>
+    <style>
+
+  </style>
+  </head>
+  <body style="margin-top:0px; right:0px; left:0px; bottom:0px;" class="bg-light">
+    <!--- Barre de menu, Navebare --->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+      <a class="navbar-brand text-white" href="#"> Kin Achat & Location </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'index' %}">Accueil <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'apropos' %}">À propos de nous </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Services
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Vente en ligne</a>
+              <a class="dropdown-item" href="#">Vente dans nos magasins</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Autres</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Collaborons ensemble</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Somba neti na zando</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Immobilier</a>
+          </li>
+        </ul>
+        <!---form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form--->
+        <ul class="navbar-nav">
+          {% if user.is_authenticated %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{request.user.username}}
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Mes commandes</a>
+                <a class="dropdown-item" href="#">Paramètres</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'logout' %}">Se déconnecter</a>
+              </div>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}" tabindex="-1" aria-disabled="true">Se connecter</a>
+            </li>
+            <!--li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}" tabindex="-1" aria-disabled="true">Créer un compte</a>
+            </li--->
+          {% endif %}
+        </ul>
+        <div class="btn-group" role="group" style="visibility: hidden;">
+    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Dropd
+    </button>
+    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+      <a class="dropdown-item" href="#">Dropdown link</a>
+      <a class="dropdown-item" href="#">Dropdown link</a>
+    </div>
+  </div>
+      </div>
+    </nav>
+    <!--- Block de contenue, c'est ici ou toutes les pages vont commencer a etre inclut --->
+    {% block body %}
+    {% endblock %}
+  <footer style="margin-top:50px;">
+    <div class="container-fluid bg-dark" style="height:auto;">
+      <div class="row"><br><br>
+        <div class="col-lg-12" style="margin-top:50px;">
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="row">
+                <div class="col-lg-12 text-info text-left"><h4>Nos produits </h4></div>
+                <div class="col-lg-12 text-muted text-left"><a class="text-muted" href="#">Saucisses de Goma</a></div>
+                <div class="col-lg-12 text-muted text-left"><a class="text-muted" href="#">Fromage de Goma</a></div>
+                <div class="col-lg-12 text-muted text-left"><a class="text-muted" href="#">Viande de boeut rôti de Goma </a></div>
+                <div class="col-lg-12 text-muted text-left"><a class="text-muted" href="#">Viande de porc rôti de Goma </a></div>
+                <div class="col-lg-12 text-muted text-left"><a class="text-muted" href="#">Fretin frais (Sambaza) de Goma </a></div>
+                <div class="col-lg-12 text-muted text-left"><a class="text-muted" href="#">Lait de vache (Masiwa) de Goma </a></div>
+                <div class="col-lg-12 text-muted text-left"><a class="text-muted" href="#">Pommade Sleeping baby pour bébé et enfant </a></div>
+                <div class="col-lg-12 text-muted text-left"><a class="text-muted" href="#">Haricots de Goma </a></div>
+                <div class="col-lg-12 text-muted text-left"><a class="text-muted" href="#">Crevette </a></div>
+                <div class="col-lg-12 text-muted text-left"><a class="text-muted" href="#">Fretin (Ndakala) de Katanga </a></div>
+                <div class="col-lg-12 text-muted text-left"><a class="text-muted" href="#">Poisson salé (bitoyo) de Katanga </a></div>
+                <div class="col-lg-12 text-muted text-left"><a class="text-muted" href="#">Poisson fumé de Katanga </a></div>
+                <div class="col-lg-12 text-muted text-left"><a class="text-muted" href="#">Mikebuka de Kalemie </a></div>
+                <div class="col-lg-12 text-muted text-left"><a class="text-muted" href="#">Poisson capitaine </a></div>
+                <hr>
+                <br><br>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="row">
+                <div class="col-lg-12 text-info text-left"><h4>À propos</h4></div>
+                <div class="col-lg-12 text-muted text-left"><a class="text-muted" href="#">Qui sommes-nous  </a></div>
+                <div class="col-lg-12 text-muted text-left"><a class="text-muted" href="#">Où nous travaillons </a></div>
+                <div class="col-lg-12 text-muted text-left"><a class="text-muted" href="#">KinAchatLocation et ses succursales </a></div>
+                <div class="col-lg-12 text-muted text-left"><a class="text-muted" href="#">Nos clients </a></div>
+                <div class="col-lg-12 text-muted text-left"><a class="text-muted" href="#">Nos partenaires </a></div>
+                <div class="col-lg-12 text-muted text-left"><a class="text-muted" href="#">Travailler avec nous </a></div>
+                <hr>
+                <br><br>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="row">
+                <div class="col-lg-12 text-info text-left"><h4>Soutiens</h4></div>
+                <div class="col-lg-12 text-muted text-left"><a class="text-muted" href="#">Centre d'aide  </a></div>
+                <div class="col-lg-12 text-muted text-left"><a class="text-muted" href="#">Faire un don </a></div>
+                <div class="col-lg-12 text-muted text-left"><a class="text-muted" href="#">Nous contacter </a></div>
+                <hr>
+                <br><br>
+              </div>
+            </div>
+            <div class="col-lg-3 text-center" style="margin-bottom:50px;">
+              <div class="row">
+                <div class="col-lg-12 text-info text-left"><h4>Suivez-nous sur:</h4></div>
+                <a href="https://www.facebook.com/Kin-Achat-Location-360101498094328/"><i class="fab fa-facebook" style="font-size: 56px"></i></a>
+                <a href="https://www.instagram.com/kin_achat_location/"><i class="fab fa-instagram" style="font-size: 56px; color: #990099"></i></a>
+                <a href="https://www.twitter.com/@KinAchat/"><i class="fab fa-twitter" style="font-size: 56px"></i></a>
+                <hr>
+                <br><br>
+              </div>
+            </div>
+          </div>
+        </div><br><br>
+        <div class="col-lg-12 bg-light text-center" style="height: 50px; line-height: 50px;">
+           <p class="text-info text-center"><i>Copyright <span class="fa fa-copyright"></span> 2020 KinAchat&Location</i></p>
+        </div>
+        <br>
+      </div>
+    </div>
+</footer>
+    <!--- script Javascript jQuery --->
+    <script src="https://kinachatlocationbucket.s3-us-west-2.amazonaws.com/static/js/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://kinachatlocationbucket.s3-us-west-2.amazonaws.com/static/js/jsfile.js"></script>
+    <script src="https://kinachatlocationbucket.s3-us-west-2.amazonaws.com/static/js/bootstrap.min.js"></script>
+    <script src="https://kinachatlocationbucket.s3-us-west-2.amazonaws.com/static/js/all.js"></script>
+  </body>
+</html>

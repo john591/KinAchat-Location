@@ -1,0 +1,38 @@
+{% extends "ebay/base.html" %}
+{% block title %}
+  Kin Achat & Location | Se connecter
+{% endblock %}
+
+{% block body %}<br><br>
+  <div class="col-lg-12">
+    <div class="row">
+      <div class="col-lg-4"></div>
+      <div class="col-lg-4 text-center border bg-white shadow-sm p-3 mb-5 bg-white rounded">
+        <h4 class="text-center"><strong> Connetez-vous grâce à vos identifiants </strong></h4>
+          {% for message in messages %}
+            <p class="alert alert-success">{{message}}</p>
+          {% endfor %}
+        <hr><br>
+          <form action="" method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+              {{field}}<br>
+            {% endfor %}
+            <small id="emailHelp" class="form-text text-muted">
+              Vous n'avez pas encore un compte ? <a href="{% url 'register' %}">Créer</a>
+            </small><br>
+            <input class="btn btn-outline-info" type="submit" name="connecter" value="se connecter">
+          </form>
+          <br><br>
+       </div>
+      </div>
+    </div>
+  <script>
+      var form_fields = document.getElementsByTagName('input')
+      form_fields[1].placeholder='Nom utilisateur..';
+      form_fields[2].placeholder='Mot de passe..';
+
+      form_fields[1].className += 'form-control';
+      form_fields[2].className += 'form-control';
+  </script>
+{% endblock %}
